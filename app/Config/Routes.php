@@ -5,6 +5,8 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Home::index');
-$routes->get('/produits','ProduitController::getProduit');
-$routes->get('/produit/(:num)' ,'ProduitController::getProduitById/$1');
+
+$routes->get('/', 'AccueilController::index');
+$routes->post('accueil/valider', 'AccueilController::valider');
+$routes->get('achat', 'AchatController::index');
+$routes->post('achat/ajouter', 'AchatController::ajouter');
