@@ -2,22 +2,23 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Caisse Supermarché</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-        .caisse-active { background-color: #e8f4f8; padding: 10px; text-align: center; font-weight: bold; border-bottom: 2px solid #0066cc; }
-        nav { background-color: #f0f0f0; padding: 10px; }
-        main { padding: 20px; }
-        form { margin: 20px 0; }
-        select, input[type="submit"] { padding: 8px; margin: 10px 5px; font-size: 16px; }
-        input[type="submit"] { background-color: #0066cc; color: white; border: none; cursor: pointer; border-radius: 4px; }
-        input[type="submit"]:hover { background-color: #004499; }
-        h4 { color: #0066cc; }
-    </style>
+    <link rel="stylesheet" href="<?= base_url('css/style.css') ?>">
 </head>
 <body>
 
     <?php $caisse = session()->get('caisse'); ?>
+    <?php $utilisateur = session()->get('utilisateur'); ?>
+    
+    <?php if ($utilisateur) : ?>
+        <div class="user-info">
+            <span>Connecté en tant que : <strong><?= esc($utilisateur['identifiant']) ?></strong></span>
+            <span>|</span>
+            <a href="<?= base_url('deconnecter') ?>">Déconnexion</a>
+        </div>
+    <?php endif ?>
+    
     <?php if ($caisse) : ?>
         <div class="caisse-active">
             Caisse sélectionnée : <strong><?= esc($caisse['libelle'] ?? ('Caisse ' . $caisse['numero'])) ?></strong>

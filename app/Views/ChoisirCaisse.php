@@ -5,7 +5,7 @@
     <h4>Choisir Caisse</h4>
 
     <?php if (session()->getFlashdata('erreur')) : ?>
-        <p style="color: red;"><?= esc(session()->getFlashdata('erreur')) ?></p>
+        <p class="error-message"><?= esc(session()->getFlashdata('erreur')) ?></p>
     <?php endif ?>
 
     <form method="post" action="./accueil/valider">

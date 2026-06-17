@@ -78,4 +78,25 @@ class AchatController extends BaseController
 
         return redirect()->to('/achat');
     }
+
+    /**
+     * Clôture l'achat en cours et crée un nouveau panier vide
+     */
+    public function cloture()
+    {
+        $caisse = session()->get('caisse');
+
+        if (! $caisse) {
+            return redirect()->to('/');
+        }
+
+        $achatModel = new AchatModel();
+        $achat      = $achatModel->getAchatEnCours($caisse['id']);
+
+        if ($achat) {
+            $achatModel->update($achat['id'], ['statut' => 'cloture']);
+        }
+
+        return redirect()->to('/achat')->with('message', 'Achat clôturé avec succès. Nouveau panier créé.');
+    }
 }
